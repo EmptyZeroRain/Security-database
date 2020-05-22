@@ -1,0 +1,59 @@
+###查看防火墙状态
+systemctl status firewalld.service
+###关闭运行的防火墙
+systemctl stop firewalld.service    
+###禁止防火墙服务器
+systemctl disable firewalld.service
+###安装依赖
+yum  install -y automake autoconf libtool  \
+gcc cmake make gcc-c++ ncurses-devel openssl-devel \
+bison ncurses chkconfig lsof   vim  libaio*
+###进去目录
+cd   
+###解压文件
+tar  zxvf  nginx 
+./configure  --prefix=/usr/local/nginx --with-openssl=../openssl-1.0.2r \
+--with-pcre=../pcre-8.43 --with-zlib=../zlib-1.2.11 \
+--with-http_ssl_module --with-http_stub_status_module
+make&&make  install
+###安装jdk
+tar  zxvf  java
+vim /etc/profile
+###修改环境变量
+export JAVA_HOME=/usr/local/jdk
+export JRE_HOME=$JAVA_HOME/jre
+PATH=$PATH:$HOME/bin:$JAVA_HOME/bin
+export PATH
+###刷新环境变量
+source /etc/profile
+###检查是否成功
+java -version
+###安装redis
+tar zxvf
+cd redis
+make PREFIX=/usr/local/redis install
+###安装mysql
+#查看centos 默认安装的mariadb 
+rpm -qa | grep mariadb
+rpm -e --nodeps mariadb-libs-5.5.56-2.el7.x86_64
+rm -rf /etc/my.cnf
+groupadd mysql
+useradd mysql -g mysql -M -s /sbin/nologin
+####给mysql用户授权mysql 文件夹
+chown -R mysql:mysql /usr/local/mysql/
+###拷贝启动文件
+cp /usr/local/mysql/support-files/mysql.server /etc/init.d/
+初始化数据库
+###使用-initialize会生成随机密码，使用-initialize-insecure生成空密码，这里选择生成空密码。
+/usr/local/mysql/bin/mysqld --initialize-insecure --user=mysql
+###启动MySql
+/etc/init.d/mysql.server start
+Starting MySQL.Logging to '/usr/local/mysql/data/VM_0_15_centos.err'.
+SUCCESS!
+添加至环境变量
+###使其永久生效，把安装目录添加至环境变量
+vim /etc/profile
+###文件最后一行添加进去
+export PATH=$PATH:/usr/local/mysql/bin
+###马上生效
+source /etc/profile
