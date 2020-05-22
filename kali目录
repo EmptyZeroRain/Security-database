@@ -1,0 +1,28 @@
+.
+├── bin -> usr/bin   执行程序
+├── boot             引导程序
+├── dev              设备目录
+├── etc              配置文件
+├── home             用户主目录（kali root用户主目录在root） 
+├── initrd.img -> boot/initrd.img-5.5.0-kali2-amd64
+├── initrd.img.old -> boot/initrd.img-5.4.0-kali2-amd64
+├── lib -> usr/lib            库文件
+├── lib32 -> usr/lib32        库文件
+├── lib64 -> usr/lib64        库文件
+├── libx32 -> usr/libx32     库文件
+├── media                  挂载外接存储
+├── mnt                   挂载外接（以前发行版用的）
+├── opt                   opt 应用程序
+├── proc                 内存中（当前配置参数）
+├── root                 root用户主目录在root
+├── run                 系统运行时需要的, 不能随便删除. 但是重启的时候应该抛弃. 下次系统运行时重新生成袭.
+├── sbin -> usr/sbin             执行程序（只有管理员有权执行）
+├── srv                          主要用来存储本机或本服务器提供的服务或数据。（用户主动生产的数据、对外提供服务）
+├── sys                         系统中的设备组织成层次结构，并向用户模式程序提供详细的内核数据结构信息
+├── tmp                       临时文件
+├── usr                       执行程序 共享文件
+├── var                       日志 邮件（经常变化的内容）
+/usr/share                   apt-get安装的文件
+/usr/share/webshells         自带的webshells
+/usr/share/wfuzz/wordlist    字典
+/usr/share/wfuzz/wordlist/general    web字典
