@@ -1,0 +1,64 @@
+# 连接数据库
+mysql -h localhost -u root -p
+备份所有数据库为sql文件
+mysqldump --all-databases --all-routines -u root -p > ~/fulldump.sql
+导入sql文件，恢复数据库
+mysql -u root -p  < ~/fulldump.sql
+设置数据库字符集为utf8
+CREATE DATABASE owa CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+查看所有数据库
+show databases
+用户权限类型
+
+为用户提供完全不受限制的访问权限 
+# ALL PRIVILEGES - gives user full unrestricted access 
+允许用户创建新表或数据库
+# CREATE - allows user to create new tables or databases
+允许用户删除表或数据库
+# DROP - allows user to delete tables or databases
+允许用户从表中删除行
+# DELETE - allows user to delete rows from tables
+允许用户在表中插入行
+# INSERT- allows user to insert rows into tables
+允许用户使用Select命令来读取数据库
+# SELECT- allows user to use the Select command to read through databases
+允许用户更新表行
+# UPDATE- allow user to update table rows
+允许用户授予或删除其他用户的特权
+# GRANT OPTION- allows user to grant or remove other users' privileges
+予特定用户特定的权限
+GRANT permission_type ON database_name.table_name TO 'username'@'hostname';
+添加用户并授予给定数据库的权限
+GRANT ALL PRIVILEGES ON database.* TO 'user'@'localhost'IDENTIFIED BY 'password' WITH GRANT OPTION;
+更改root密码
+SET PASSWORD FOR root@localhost=PASSWORD('new_password');
+删除数据库
+DROP DATABASE database_name;
+从MySQL授权表重新加载特权
+FLUSH PRIVILEGES;
+显示特定用户的权限
+SHOW GRANTS FOR 'username'@'hostname';
+显示当前用户
+SELECT CURRENT_USER();
+删除数据库中的表
+DROP TABLE table_name;
+查询表信息
+SELECT * FROM table_name;
+创建一个表（以用户表为例）
+注意：由于用户名是主键，因此默认情况下它不是NULL。在此示例中，电子邮件是可选的。
+CREATE TABLE Users (
+	username VARCHAR(80),
+	password VARCHAR(80) NOT NULL,
+	email VARCHAR(80),
+	PRIMARY KEY (username)
+);
+禁用常规日志记录 
+set global general_log=0;
+使用数据库
+use database_name; 
+查询用户表
+select  User,authentication_string,Host from user;   
+设置host为%的root用户的密码
+GRANT ALL PRIVILEGES ON *.* TO 'root'@'%' IDENTIFIED BY '123456'  ; 
+更新root密码
+update mysql.user set authentication_string=password('123456') where user='root'; 修改密码为123456
