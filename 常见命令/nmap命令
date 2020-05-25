@@ -1,0 +1,20 @@
+＃HTB扫描
+＃sV：枚举版本
+＃sC：安全脚本
+＃oA：输出所有格式
+nmap -sV -sC -oA nmap 0.0.0.0
+
+＃Nmap详细扫描，运行同步隐身，T4定时（在局域网上应该可以），操作系统和服务版本信息，针对服务的traceroute和脚本
+nmap -v -sS -A -T4目标
+
+＃如上，但扫描所有TCP端口（花费更长的时间）
+nmap -v -sS -p- -A -T4目标
+
+＃如上，但是扫描所有TCP端口和UDP扫描（时间更长）
+nmap -v -sU -sS -p- -A -T4目标
+
+＃在nmap脚本中搜索关键字
+ls / usr / share / nmap / scripts / * | grep FTP
+
+＃Nmap脚本扫描易受攻击的SMB服务器-警告：不安全= 1可能会导致故障转移
+nmap -v -p 445 --script = smb-check-vulns --script-args = unsafe = 1目标
